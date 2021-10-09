@@ -1,13 +1,13 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import Login from './components/Login';
-import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 import { useStateValue } from './StateProvider';
 import { useEffect } from 'react';
 import { auth } from './firebase';
 import RegisterTwo from './components/RegisterTwo';
+import PrivetRoute from './components/PrivetRoute';
 
 function App() {
   const [{user}, dispatch] = useStateValue();
@@ -47,10 +47,10 @@ function App() {
           <Route path='/register' exact>
             <RegisterTwo/>
           </Route>
-          <Route path='/dashboard' exact>
+          <PrivetRoute path='/dashboard' exact>
             <Dashboard user={user}/>
-            {user?.email ? <Redirect to='/dashboard'/> : <Redirect to='/login'/>}
-          </Route>
+            {/* {user?.email ? <Redirect to='/dashboard'/> : <Redirect to='/login'/>} */}
+          </PrivetRoute>
           <Route path='*' exact>
             <NotFound/>
           </Route>
